@@ -4658,7 +4658,7 @@ function pickLang(code){
 }
 
 // ═══ Supabase ═══
-var _sb=supabase.createClient('https://mztoenhgfuomzrashrqk.supabase.co','sb_publishable_pOM3IfVWYiscQ-cz9vAwvA_F2Ht6zg1');
+var _sb=supabase.createClient('https://mztoenhgfuomzrashrqk.supabase.co','sb_publishable_pOM3IfVWYiscQ-cz9vAwvA_F2Ht6zg1',{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}});
 
 // ═══════════════════════════════════════════════════════════
 // 商业广告模块接口（预留空壳，当前不生效，方便以后接入）
@@ -6059,6 +6059,12 @@ function triggerLock(){
   // 启动时不触发（由启动逻辑决定显示什么）
   if(!lg('appLockPin'))return;
   if(!_appWasActive)return; // 还没进入过主界面，不触发
+  // 检查 lockTimeout：未到设定时间不锁
+  var lockMins=parseInt(lg('lockTimeout'))||0;
+  if(lockMins>0){
+    var hiddenMs=Date.now()-(parseInt(lg('lastHiddenAt'))||0);
+    if(hiddenMs<lockMins*60*1000)return;
+  }
   var active=document.querySelector('.screen.active');
   if(!active)return;
   if(active.id==='applock'||active.id==='testgate')return;
@@ -6159,7 +6165,6 @@ function hideContact(cid){
   loadContacts();
 }
 async function deleteContact(cid){
-  if(!confirm('确定要删除这段聊天记录吗？此操作不可恢复。\n（联系人不会被删除，仍在通讯录里）'))return;
   var mid=String(myId);
   var room=roomIdOf(mid,cid);
   var legacyRoom=[mid,cid].sort().join('_'); // 兼容旧版本可能用过字符串排序生成的room_id，一并清理
