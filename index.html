@@ -1096,7 +1096,7 @@ textarea.field-input{resize:none;line-height:1.5;}
     </div>
 
     <!-- ─── 场景模式 ─── -->
-    <div style="margin-top:20px;padding:0 16px 6px;font-size:13px;color:#8e8e93;text-transform:uppercase;letter-spacing:.3px;">场景模式</div>
+    <div id="sh-mode" style="margin-top:20px;padding:0 16px 6px;font-size:13px;color:#8e8e93;text-transform:uppercase;letter-spacing:.3px;">场景模式</div>
     <div class="card" style="padding:0;">
       <div class="focus-wheel">
         <div class="focus-mode" id="fm-free" onclick="setFocusMode('free')">
@@ -1124,14 +1124,14 @@ textarea.field-input{resize:none;line-height:1.5;}
     </div>
 
     <!-- ─── 通知与推送 ─── -->
-    <div style="margin-top:20px;padding:0 16px 6px;font-size:13px;color:#8e8e93;text-transform:uppercase;letter-spacing:.3px;">通知与推送</div>
+    <div id="sh-notif" style="margin-top:20px;padding:0 16px 6px;font-size:13px;color:#8e8e93;text-transform:uppercase;letter-spacing:.3px;">通知与推送</div>
     <div class="card" style="padding:0;">
 
       <!-- 系统推送开关 -->
       <div class="row" onclick="togglePushDirect()" style="padding:14px 16px;">
         <div class="si" style="background:var(--theme-row-bg);"><svg viewBox="0 0 24 24" width="18" height="18" stroke="var(--theme-icon)" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></div>
         <div style="flex:1;">
-          <div style="font-size:17px;">消息推送通知</div>
+          <div id="set-pushNotif" style="font-size:17px;">消息推送通知</div>
           <div style="font-size:13px;color:#8e8e93;margin-top:1px;" id="pwaBindStatus">收到消息时推送通知</div>
         </div>
         <div class="tog" id="pushDirectToggle" onclick="event.stopPropagation();togglePushDirect()"><div class="td"></div></div>
@@ -1205,7 +1205,7 @@ textarea.field-input{resize:none;line-height:1.5;}
     </div>
 
     <!-- ─── 隐私与安全 ─── -->
-    <div style="margin-top:20px;padding:0 16px 6px;font-size:13px;color:#8e8e93;text-transform:uppercase;letter-spacing:.3px;">隐私与安全</div>
+    <div id="sh-priv" style="margin-top:20px;padding:0 16px 6px;font-size:13px;color:#8e8e93;text-transform:uppercase;letter-spacing:.3px;">隐私与安全</div>
     <div class="card" style="padding:0;">
       <div class="row" onclick="show('hide-set')" style="padding:14px 16px;">
         <div class="si" style="background:var(--theme-row-bg);"><svg viewBox="0 0 24 24" width="18" height="18" stroke="var(--theme-icon)" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 11a5 5 0 00-10 0"/><circle cx="12" cy="16" r="1"/><path d="M3 11h18l-1.5 8a2 2 0 01-2 1.7H6.5a2 2 0 01-2-1.7L3 11z"/></svg></div>
@@ -1234,13 +1234,13 @@ textarea.field-input{resize:none;line-height:1.5;}
     </div>
 
     <!-- ─── 外观与语言 ─── -->
-    <div style="margin-top:20px;padding:0 16px 6px;font-size:13px;color:#8e8e93;text-transform:uppercase;letter-spacing:.3px;">外观与语言</div>
+    <div id="sh-appearance" style="margin-top:20px;padding:0 16px 6px;font-size:13px;color:#8e8e93;text-transform:uppercase;letter-spacing:.3px;">外观与语言</div>
     <div class="card" style="padding:0;">
       <!-- 主题折叠 -->
       <div onclick="toggleThemeDrawer()" style="display:flex;align-items:center;padding:14px 16px;cursor:pointer;-webkit-tap-highlight-color:transparent;">
         <div id="themeCurrentDot" style="width:28px;height:28px;border-radius:8px;flex-shrink:0;margin-right:12px;background:linear-gradient(135deg,#ff9a9e,#a18cd1);"></div>
         <div style="flex:1;">
-          <div style="font-size:17px;">主题外观</div>
+          <div id="set-theme" style="font-size:17px;">主题外观</div>
           <div style="font-size:13px;color:#8e8e93;margin-top:1px;" id="themeCurrentName">粉紫</div>
         </div>
         <span style="color:#c7c7cc;font-size:14px;transition:transform .2s;" id="themeDrawerArrow">›</span>
@@ -1258,17 +1258,17 @@ textarea.field-input{resize:none;line-height:1.5;}
     </div>
 
     <!-- ─── 账号操作 ─── -->
-    <div style="margin-top:20px;padding:0 16px 6px;font-size:13px;color:#8e8e93;text-transform:uppercase;letter-spacing:.3px;">账号</div>
+    <div id="sh-account-sec" style="margin-top:20px;padding:0 16px 6px;font-size:13px;color:#8e8e93;text-transform:uppercase;letter-spacing:.3px;">账号</div>
     <div class="card" style="padding:0;">
       <div class="row" onclick="show('account-set')" style="padding:14px 16px;">
         <div class="si" style="background:var(--theme-row-bg);"><svg viewBox="0 0 24 24" width="18" height="18" stroke="var(--theme-icon)" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
-        <div style="flex:1;"><div style="font-size:17px;">账号设置</div></div>
+        <div style="flex:1;"><div id="set-accSettings" style="font-size:17px;">账号设置</div></div>
         <span style="color:#c7c7cc;font-size:18px;">›</span>
       </div>
       <div class="row" onclick="showDeviceManager()" style="border-top:1px solid var(--theme-border);padding:14px 16px;">
         <div class="si" style="background:var(--theme-row-bg);"><svg viewBox="0 0 24 24" width="18" height="18" stroke="var(--theme-icon)" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg></div>
         <div style="flex:1;">
-          <div style="font-size:17px;">登录设备</div>
+          <div id="set-devices" style="font-size:17px;">登录设备</div>
           <div style="font-size:13px;color:#8e8e93;margin-top:1px;" id="deviceCountTxt">查看并管理登录设备</div>
         </div>
         <span style="color:#c7c7cc;font-size:18px;">›</span>
@@ -1276,7 +1276,7 @@ textarea.field-input{resize:none;line-height:1.5;}
       <div class="row" id="bindEmailRow" onclick="bindEmailToAccount()" style="border-top:1px solid var(--theme-border);">
         <div class="si" style="background:var(--theme-row-bg);">📧</div>
         <div style="flex:1;">
-          <div style="font-size:17px;">绑定邮箱</div>
+          <div id="set-bindEmail" style="font-size:17px;">绑定邮箱</div>
           <div class="row-sub" style="font-size:13px;color:#8e8e93;margin-top:1px;">用于找回密码，可选</div>
         </div>
         <span style="color:#c7c7cc;font-size:18px;">›</span>
@@ -1287,11 +1287,11 @@ textarea.field-input{resize:none;line-height:1.5;}
       </div>
       <div class="row" onclick="deleteAccount()" style="border-top:1px solid var(--theme-border);padding:14px 16px;">
         <div class="si" style="background:var(--theme-row-bg);font-size:18px;">🗑️</div>
-        <div style="flex:1;"><div style="font-size:17px;color:#ff3b30;">注销账号</div><div style="font-size:13px;color:#8e8e93;margin-top:1px;">永久删除账号和数据</div></div>
+        <div style="flex:1;"><div id="set-deleteAccount" style="font-size:17px;color:#ff3b30;">注销账号</div><div style="font-size:13px;color:#8e8e93;margin-top:1px;">永久删除账号和数据</div></div>
       </div>
       <div class="row" onclick="window.open('https://chunhua1780.github.io/ghostchat/privacy.html','_blank')" style="border-top:1px solid var(--theme-border);padding:14px 16px;">
         <div class="si" style="background:var(--theme-row-bg);font-size:18px;">📄</div>
-        <div style="flex:1;"><div style="font-size:17px;">隐私政策</div></div>
+        <div style="flex:1;"><div id="set-privPolicy" style="font-size:17px;">隐私政策</div></div>
         <span style="color:#c7c7cc;font-size:18px;">›</span>
       </div>
     </div>
@@ -3309,7 +3309,7 @@ function setLang(code){
 
 
 // ═══ 核心版本 ═══
-var CORE_VERSION='v1.57';
+var CORE_VERSION='v1.58';
 
 // ═══ 广告系统配置（统一后台广告）═══
 var ADS_CONFIG = {
@@ -4026,7 +4026,7 @@ window.onload=async function(){
   if(gateBubble){gateBubble.addEventListener('animationend',function(e){if(e.animationName==='gateShake')gateBubble.classList.remove('gate-shake');});}
   var lockBubble=document.getElementById('lockBubble');
   if(lockBubble){lockBubble.addEventListener('animationend',function(e){if(e.animationName==='gateShake')lockBubble.classList.remove('gate-shake');});}
-  applyLang();
+  applyLang();_applyLangExt();
   tickClock();
   var _cv=document.getElementById('coreVerBadge');if(_cv)_cv.textContent=CORE_VERSION;
   var _sv=document.getElementById('settingsVerLabel');if(_sv)_sv.textContent='GhostChat '+CORE_VERSION;
@@ -5588,10 +5588,36 @@ function applyLang(){
   var cl=document.getElementById('curLangShow');if(cl)cl.textContent=(LANGS[curLang]||{}).name||'English';
 }
 
+function _applyLangExt(){
+  var EXT={
+    'en':{tab_msg:'Messages',tab_contacts:'Contacts',tab_settings:'Settings',sett_mode:'Focus Mode',sett_notif:'Notifications',sett_priv:'Privacy & Security',sett_appear:'Appearance',sett_account_sec:'Account',sett_pushNotif:'Push Notifications',sett_theme:'Theme',sett_accSettings:'Account Settings',sett_devices:'Devices',sett_bindEmail:'Bind Email',sett_deleteAccount:'Delete Account',sett_privPolicy:'Privacy Policy',mode_free:'Free',mode_work:'Work',mode_home:'Home',mode_home2:'Home 2',mode_ghost:'Ghost',chatPh:'Say something...'},
+    'zh-CN':{tab_msg:'消息',tab_contacts:'通讯录',tab_settings:'设置',sett_mode:'场景模式',sett_notif:'通知与推送',sett_priv:'隐私与安全',sett_appear:'外观与语言',sett_account_sec:'账号',sett_pushNotif:'消息推送通知',sett_theme:'主题外观',sett_accSettings:'账号设置',sett_devices:'登录设备',sett_bindEmail:'绑定邮箱',sett_deleteAccount:'注销账号',sett_privPolicy:'隐私政策',mode_free:'自由',mode_work:'工作',mode_home:'回家',mode_home2:'回家②',mode_ghost:'隐身',chatPh:'说点什么…'},
+    'zh-TW':{tab_msg:'訊息',tab_contacts:'聯絡人',tab_settings:'設定',sett_mode:'情境模式',sett_notif:'通知與推送',sett_priv:'隱私與安全',sett_appear:'外觀與語言',sett_account_sec:'帳號',sett_pushNotif:'訊息推送通知',sett_theme:'主題外觀',sett_accSettings:'帳號設定',sett_devices:'登入裝置',sett_bindEmail:'綁定信箱',sett_deleteAccount:'登出帳號',sett_privPolicy:'隱私政策',mode_free:'自由',mode_work:'工作',mode_home:'回家',mode_home2:'回家②',mode_ghost:'隱身',chatPh:'說點什麼…'},
+    'es':{tab_msg:'Mensajes',tab_contacts:'Contactos',tab_settings:'Ajustes',sett_mode:'Modo escena',sett_notif:'Notificaciones',sett_priv:'Privacidad',sett_appear:'Apariencia',sett_account_sec:'Cuenta',sett_pushNotif:'Notif. push',sett_theme:'Tema',sett_accSettings:'Cuenta',sett_devices:'Dispositivos',sett_bindEmail:'Vincular email',sett_deleteAccount:'Eliminar cuenta',sett_privPolicy:'Privacidad',mode_free:'Libre',mode_work:'Trabajo',mode_home:'Casa',mode_home2:'Casa 2',mode_ghost:'Fantasma',chatPh:'Di algo...'},
+    'fr':{tab_msg:'Messages',tab_contacts:'Contacts',tab_settings:'Paramètres',sett_mode:'Mode scène',sett_notif:'Notifications',sett_priv:'Confidentialité',sett_appear:'Apparence',sett_account_sec:'Compte',sett_pushNotif:'Notif. push',sett_theme:'Thème',sett_accSettings:'Compte',sett_devices:'Appareils',sett_bindEmail:'Lier email',sett_deleteAccount:'Supprimer compte',sett_privPolicy:'Confidentialité',mode_free:'Libre',mode_work:'Travail',mode_home:'Maison',mode_home2:'Maison 2',mode_ghost:'Fantôme',chatPh:'Dites quelque chose...'},
+    'de':{tab_msg:'Nachrichten',tab_contacts:'Kontakte',tab_settings:'Einstellungen',sett_mode:'Fokusmodus',sett_notif:'Benachrichtigungen',sett_priv:'Datenschutz',sett_appear:'Darstellung',sett_account_sec:'Konto',sett_pushNotif:'Push-Benachrichtigungen',sett_theme:'Design',sett_accSettings:'Konto',sett_devices:'Geräte',sett_bindEmail:'E-Mail',sett_deleteAccount:'Konto löschen',sett_privPolicy:'Datenschutz',mode_free:'Frei',mode_work:'Arbeit',mode_home:'Zuhause',mode_home2:'Zuhause 2',mode_ghost:'Geist',chatPh:'Sag etwas...'},
+    'ru':{tab_msg:'Сообщения',tab_contacts:'Контакты',tab_settings:'Настройки',sett_mode:'Режим сцены',sett_notif:'Уведомления',sett_priv:'Конфиденциальность',sett_appear:'Оформление',sett_account_sec:'Аккаунт',sett_pushNotif:'Push-уведомления',sett_theme:'Тема',sett_accSettings:'Аккаунт',sett_devices:'Устройства',sett_bindEmail:'Привязать e-mail',sett_deleteAccount:'Удалить аккаунт',sett_privPolicy:'Конфиденциальность',mode_free:'Свобода',mode_work:'Работа',mode_home:'Дом',mode_home2:'Дом 2',mode_ghost:'Призрак',chatPh:'Напишите что-нибудь...'},
+    'ar':{tab_msg:'الرسائل',tab_contacts:'جهات الاتصال',tab_settings:'الإعدادات',sett_mode:'وضع المشهد',sett_notif:'الإشعارات',sett_priv:'الخصوصية',sett_appear:'المظهر',sett_account_sec:'الحساب',sett_pushNotif:'إشعارات الدفع',sett_theme:'المظهر',sett_accSettings:'الحساب',sett_devices:'الأجهزة',sett_bindEmail:'ربط البريد',sett_deleteAccount:'حذف الحساب',sett_privPolicy:'الخصوصية',mode_free:'حر',mode_work:'عمل',mode_home:'بيت',mode_home2:'بيت ٢',mode_ghost:'شبح',chatPh:'قل شيئاً...'},
+    'pt':{tab_msg:'Mensagens',tab_contacts:'Contatos',tab_settings:'Configurações',sett_mode:'Modo de cena',sett_notif:'Notificações',sett_priv:'Privacidade',sett_appear:'Aparência',sett_account_sec:'Conta',sett_pushNotif:'Notif. push',sett_theme:'Tema',sett_accSettings:'Conta',sett_devices:'Dispositivos',sett_bindEmail:'Vincular e-mail',sett_deleteAccount:'Excluir conta',sett_privPolicy:'Privacidade',mode_free:'Livre',mode_work:'Trabalho',mode_home:'Casa',mode_home2:'Casa 2',mode_ghost:'Fantasma',chatPh:'Diga algo...'},
+    'ja':{tab_msg:'メッセージ',tab_contacts:'連絡先',tab_settings:'設定',sett_mode:'フォーカスモード',sett_notif:'通知',sett_priv:'プライバシー',sett_appear:'外観',sett_account_sec:'アカウント',sett_pushNotif:'プッシュ通知',sett_theme:'テーマ',sett_accSettings:'アカウント',sett_devices:'デバイス',sett_bindEmail:'メール連携',sett_deleteAccount:'アカウント削除',sett_privPolicy:'プライバシーポリシー',mode_free:'フリー',mode_work:'仕事',mode_home:'帰宅',mode_home2:'帰宅②',mode_ghost:'ゴースト',chatPh:'メッセージを入力...'},
+    'ko':{tab_msg:'메시지',tab_contacts:'연락처',tab_settings:'설정',sett_mode:'집중 모드',sett_notif:'알림',sett_priv:'개인정보',sett_appear:'외관',sett_account_sec:'계정',sett_pushNotif:'푸시 알림',sett_theme:'테마',sett_accSettings:'계정',sett_devices:'기기',sett_bindEmail:'이메일 연결',sett_deleteAccount:'계정 삭제',sett_privPolicy:'개인정보 처리방침',mode_free:'자유',mode_work:'업무',mode_home:'귀가',mode_home2:'귀가②',mode_ghost:'유령',chatPh:'메시지를 입력하세요...'},
+    'hi':{tab_msg:'संदेश',tab_contacts:'संपर्क',tab_settings:'सेटिंग्स',sett_mode:'फोकस मोड',sett_notif:'सूचनाएं',sett_priv:'गोपनीयता',sett_appear:'रूप',sett_account_sec:'खाता',sett_pushNotif:'पुश सूचनाएं',sett_theme:'थीम',sett_accSettings:'खाता',sett_devices:'डिवाइस',sett_bindEmail:'ईमेल',sett_deleteAccount:'खाता हटाएं',sett_privPolicy:'गोपनीयता नीति',mode_free:'स्वतंत्र',mode_work:'काम',mode_home:'घर',mode_home2:'घर २',mode_ghost:'भूत',chatPh:'कुछ कहें...'}
+  };
+  var l=EXT[curLang]||EXT['en'];
+  if(!l)return;
+  function _t(id,key){var e=document.getElementById(id);if(e&&l[key])e.textContent=l[key];}
+  function _fc(pid,key){var p=document.getElementById(pid);if(!p)return;var c=p.querySelector('.fm-label');if(c&&l[key])c.textContent=l[key];}
+  _t('sh-mode','sett_mode');_t('sh-notif','sett_notif');_t('sh-priv','sett_priv');_t('sh-appearance','sett_appear');_t('sh-account-sec','sett_account_sec');
+  _t('set-pushNotif','sett_pushNotif');_t('set-theme','sett_theme');_t('set-accSettings','sett_accSettings');_t('set-devices','sett_devices');_t('set-bindEmail','sett_bindEmail');_t('set-deleteAccount','sett_deleteAccount');_t('set-privPolicy','sett_privPolicy');
+  _fc('fm-free','mode_free');_fc('fm-work','mode_work');_fc('fm-home','mode_home');_fc('fm-home2','mode_home2');_fc('fm-ghost','mode_ghost');
+  document.querySelectorAll('.tabs .tab').forEach(function(el,i){var k=['tab_msg','tab_contacts','tab_settings'][i%3],v=l[k];if(!v)return;for(var j=0;j<el.childNodes.length;j++){if(el.childNodes[j].nodeType===3&&el.childNodes[j].textContent.trim()){el.childNodes[j].textContent=v;break;}}});
+  var mi=document.getElementById('mi');if(mi&&l.chatPh)mi.placeholder=l.chatPh;
+}
+
 function pickLang(code){
   curLang=code;ls('lang',code);
   document.body.dir=['ar','ur'].includes(code)?'rtl':'ltr';
-  applyLang();
+  applyLang();_applyLangExt();
   buildLangBtns();buildLangList();
   show('settings');
 }
