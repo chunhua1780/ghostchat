@@ -3365,7 +3365,7 @@ function setLang(code){
 
 
 // ═══ 核心版本 ═══
-var CORE_VERSION='v1.60';
+var CORE_VERSION='v1.61';
 
 // ═══ 广告系统配置（统一后台广告）═══
 var ADS_CONFIG = {
@@ -7474,29 +7474,43 @@ function unhideContact(cid){
   loadFriendsList();
 }
 async function deleteContact(cid){
-  // 立即从 DOM 移除，立即更新本地缓存（秒生效，不需等 DB）
+  var mid=String(myId);
+  var room=roomIdOf(mid,cid);
+  var legacyRoom=[mid,cid].sort().join('_');
+  // 立即从 DOM 移除，立即更新本地缓存
   _removeContactFromDOM(cid);
   _removeCidFromChatListCache(cid);
-  // 清本机内存和消息缓存
+  // 彻底清除本机消息缓存（内存 + localStorage + IndexedDB）
   if(G.msgs&&G.msgs[cid])delete G.msgs[cid];
-  saveLocalMsgs(cid,[]);
+  var msgKey='msgcache_'+String(cid);
+  try{localStorage.removeItem(msgKey);}catch(e){}
+  openMsgDB().then(function(db){
+    if(!db)return;
+    try{db.transaction('chats','readwrite').objectStore('chats').delete(msgKey);}catch(e){}
+  });
   if(_unread)_unread[cid]=0;
   // 加入本地删除名单（阻断实时消息在删除后复活）
   addDeletedContact(cid);
   // 从隐藏列表中也移除
   var h=getHiddenContacts();
   if(h.indexOf(cid)>=0){h=h.filter(function(x){return x!==cid;});setHiddenContacts(h);}
-  var mid=String(myId);
-  var room=roomIdOf(mid,cid);
-  var legacyRoom=[mid,cid].sort().join('_');
   if(currentRoom===room||currentRoom===legacyRoom){
     if(realtimeSub){try{realtimeSub.unsubscribe();}catch(e){}realtimeSub=null;}
     currentRoom=null;
   }
-  // 硬删除 DB 会话（数据库为准，彻底杜绝下次同步复活）
+  // 云端同时删除：消息记录 + 会话记录
+  _sb.from('messages').delete().eq('room_id',room).then(function(r){
+    if(r&&r.error)console.warn('[deleteContact] msg delete error:',r.error.message);
+  }).catch(function(e){console.warn('[deleteContact] msg delete fail:',e&&e.message);});
+  if(legacyRoom!==room){
+    _sb.from('messages').delete().eq('room_id',legacyRoom).then(function(){}).catch(function(){});
+  }
   _sb.from('conversations').delete().eq('room_id',room).then(function(r){
     if(r&&r.error)console.warn('[deleteContact] conv delete error:',r.error.message);
   }).catch(function(e){console.warn('[deleteContact] conv delete fail:',e&&e.message);});
+  if(legacyRoom!==room){
+    _sb.from('conversations').delete().eq('room_id',legacyRoom).then(function(){}).catch(function(){});
+  }
   // 强制重建列表（绕过节流）
   _lastContactsLoad=0;
   loadContacts();
