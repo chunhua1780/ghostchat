@@ -565,8 +565,8 @@ function renderMsgs(){
     // 状态：只保留失败提示，去掉发送中图标
     var statusTick='';
     if(s&&m.failed)statusTick='<span style="color:#ff3b30;font-size:11px;margin-left:2px;cursor:pointer;" title="发送失败，点重试" onclick="retrySendText(this)">⚠️失败</span>';
-    // 🐾🐾 双爪，每条已读消息内部右侧都显示，柔和灰棕色
-    var inPaw=(s&&m.read&&m.id!=null)?'<span style="display:inline-flex;gap:0.5px;margin-left:4px;vertical-align:bottom;line-height:1;font-size:9px;filter:sepia(0.4) saturate(0.3) brightness(1.15);opacity:0.55;">🐾🐾</span>':'';
+    // 🐾 已读猫爪，每条已读消息内部右侧，柔和灰棕色
+    var inPaw=(s&&m.read&&m.id!=null)?'<span style="display:inline-block;margin-left:4px;vertical-align:bottom;line-height:1;font-size:10px;filter:sepia(0.5) saturate(0.4) brightness(1.1);opacity:0.62;">🐾</span>':'';
     // 气泡背景与文字颜色通过CSS变量控制
     var bubSty='';
     if(s&&m.id!=null&&!m.failed&&!m.read){bubSty=' style="background:var(--cs-sent-unread);color:var(--cs-sent-text,#fff);"';}
