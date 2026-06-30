@@ -1,7 +1,7 @@
-// GhostChat Service Worker v2.0 — stale-while-revalidate + push
-const CACHE = 'gc-v1.79';
+﻿// GhostChat Service Worker v2.0 â€” stale-while-revalidate + push
+const CACHE = 'gc-v1.80';
 
-// ── Install: pre-cache shell ──
+// â”€â”€ Install: pre-cache shell â”€â”€
 self.addEventListener('install', function(e){
   e.waitUntil(
     caches.open(CACHE).then(function(c){
@@ -11,7 +11,7 @@ self.addEventListener('install', function(e){
   self.skipWaiting();
 });
 
-// ── Activate: purge stale caches ──
+// â”€â”€ Activate: purge stale caches â”€â”€
 self.addEventListener('activate', function(e){
   e.waitUntil(
     caches.keys().then(function(keys){
@@ -21,11 +21,11 @@ self.addEventListener('activate', function(e){
   e.waitUntil(self.clients.claim());
 });
 
-// ── Fetch: stale-while-revalidate for app assets, passthrough for API ──
+// â”€â”€ Fetch: stale-while-revalidate for app assets, passthrough for API â”€â”€
 self.addEventListener('fetch', function(e){
   var url = e.request.url;
   if(e.request.method !== 'GET') return;
-  // Supabase API, metered TURN, push APIs → network only (no cache)
+  // Supabase API, metered TURN, push APIs â†’ network only (no cache)
   if(url.indexOf('supabase.co') >= 0 || url.indexOf('metered.ca') >= 0 ||
      url.indexOf('onesignal.com') >= 0 || url.indexOf('fcm.googleapis.com') >= 0) return;
 
@@ -46,7 +46,7 @@ self.addEventListener('fetch', function(e){
   );
 });
 
-// ── Notification click ──
+// â”€â”€ Notification click â”€â”€
 self.addEventListener('notificationclick', function(e){
   e.notification.close();
   var targetUrl = 'https://chunhua1780.github.io/ghostchat/';
@@ -66,17 +66,18 @@ self.addEventListener('notificationclick', function(e){
   );
 });
 
-// ── Web Push ──
+// â”€â”€ Web Push â”€â”€
 self.addEventListener('push', function(e){
   if(!e.data) return;
   var data = {};
-  try{data = e.data.json();}catch(err){data = {title:'💬 新消息', body: e.data.text()};}
+  try{data = e.data.json();}catch(err){data = {title:'ðŸ’¬ æ–°æ¶ˆæ¯', body: e.data.text()};}
   e.waitUntil(
-    self.registration.showNotification(data.title||'💬 GhostChat', {
-      body: data.body||'你收到了一条新消息',
+    self.registration.showNotification(data.title||'ðŸ’¬ GhostChat', {
+      body: data.body||'ä½ æ”¶åˆ°äº†ä¸€æ¡æ–°æ¶ˆæ¯',
       icon: './icon192.png', badge: './icon192.png',
       tag: data.tag||'gc-msg', renotify: true, silent: false,
       requireInteraction: false, data: {url: data.url||'https://chunhua1780.github.io/ghostchat/'}
     })
   );
 });
+
