@@ -562,17 +562,14 @@ function renderMsgs(){
       else if(m.src)b='<a href="'+m.src+'" target="_blank" download style="display:flex;align-items:center;gap:8px;color:inherit;text-decoration:none;min-width:160px;"><span style="font-size:24px;">📄</span><div style="overflow:hidden;"><div style="font-weight:600;word-break:break-all;">'+esc(m.fname||'File')+'</div><div style="font-size:12px;opacity:.7;">点击下载</div></div></a>';
       else b='<div>📄 File</div>';
     }else{var txt=m.text||m.content||'';if(txt.length>500)txt='[Message]';b=esc(txt);}
-    // 状态：失败/发送中 显示在时间行；单个🐾只在最后一条已读消息内部右侧
+    // 状态：只保留失败提示，去掉发送中图标
     var statusTick='';
-    if(s){
-      if(m.failed)statusTick='<span style="color:#ff3b30;font-size:11px;margin-left:2px;cursor:pointer;" title="发送失败，点重试" onclick="retrySendText(this)">⚠️失败</span>';
-      else if(m.id==null||m.loading)statusTick='<span style="color:#c8a8e0;font-size:11px;margin-left:2px;" title="发送中">🕐</span>';
-    }
-    // 🐾 单个，嵌入气泡内部右侧，只在最后一条已读消息上
-    var inPaw=(s&&i===_lastReadSentIdx)?'<span style="display:inline-block;margin-left:5px;font-size:12px;opacity:0.65;vertical-align:bottom;line-height:1;">🐾</span>':'';
-    // 气泡：我发未读→暖橙；我发已读→bub-read白底暗字立体；收到→自然色
+    if(s&&m.failed)statusTick='<span style="color:#ff3b30;font-size:11px;margin-left:2px;cursor:pointer;" title="发送失败，点重试" onclick="retrySendText(this)">⚠️失败</span>';
+    // 🐾🐾 双爪，每条已读消息内部右侧都显示，柔和灰棕色
+    var inPaw=(s&&m.read&&m.id!=null)?'<span style="display:inline-flex;gap:0.5px;margin-left:4px;vertical-align:bottom;line-height:1;font-size:9px;filter:sepia(0.4) saturate(0.3) brightness(1.15);opacity:0.55;">🐾🐾</span>':'';
+    // 气泡背景与文字颜色通过CSS变量控制
     var bubSty='';
-    if(s&&m.id!=null&&!m.failed&&!m.read){bubSty=' style="background:#ff8c5a;color:#fff;"';}
+    if(s&&m.id!=null&&!m.failed&&!m.read){bubSty=' style="background:var(--cs-sent-unread);color:var(--cs-sent-text,#fff);"';}
     var bubCls='bub'+(s&&m.read&&m.id!=null?' bub-read':'');
     var midAttr=(s&&m.id!=null)?(' data-mid="'+m.id+'"'):'';
     html+='<div class="mr '+(s?'s':'r')+'"><div class="'+bubCls+'"'+midAttr+bubSty+'>'+b+inPaw+'</div><div class="mt">'+m.t+statusTick+'</div></div>';

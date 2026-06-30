@@ -1,5 +1,5 @@
 ﻿// GhostChat Service Worker v2.0 â€” stale-while-revalidate + push
-const CACHE = 'gc-v1.80';
+const CACHE = 'gc-v1.81';
 
 // â”€â”€ Install: pre-cache shell â”€â”€
 self.addEventListener('install', function(e){
