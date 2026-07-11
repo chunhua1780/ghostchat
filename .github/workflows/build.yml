@@ -19,7 +19,7 @@ jobs:
     - name: Build APK
       run: |
         cordova create app com.ghostchat.site "GhostChat"
-        cp index.html app/www/index.html
+        for f in *.html *.js *.json *.png lang vendor; do [ -e "$f" ] && cp -r "$f" app/www/; done
         cd app
         cordova platform add android
         sed -i 's|</widget>|    <preference name="android-windowSoftInputMode" value="adjustResize"/>\n    <preference name="Orientation" value="portrait"/>\n</widget>|' config.xml
