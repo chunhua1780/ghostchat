@@ -22,6 +22,7 @@ jobs:
         for f in *.html *.js *.json *.png lang vendor; do [ -e "$f" ] && cp -r "$f" app/www/; done
         cd app
         cordova platform add android
+        cordova plugin add onesignal-cordova-plugin
         sed -i 's|</widget>|    <preference name="android-windowSoftInputMode" value="adjustResize"/>\n    <preference name="Orientation" value="portrait"/>\n</widget>|' config.xml
         cordova build android
     - name: Find APK
