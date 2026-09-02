@@ -1,8 +1,8 @@
 {
   "name": "GhostChat",
   "short_name": "GhostChat",
-  "start_url": "https://chunhua1780.github.io/ghostchat-site/",
-  "scope": "https://chunhua1780.github.io/ghostchat-site/",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#fdf2f8",
@@ -14,9 +14,15 @@
       "type": "image/png"
     },
     {
-      "src": "./icon192.png",
+      "src": "./icon512.png",
       "sizes": "512x512",
       "type": "image/png"
+    },
+    {
+      "src": "./icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
