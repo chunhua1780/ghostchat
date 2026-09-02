@@ -1,0 +1,36 @@
+{
+  "_readme": [
+    "外壳定义集中放在内核仓库，这样加一个伪装壳只要在这里加一段，不用再复制一份 index.html。",
+    "外壳仓库（gc-calculator / gc-weather）只保留 workflow 和图标，构建时 checkout 内核并跑",
+    "tools/build-shell.js --shell=<id> 生成品牌化的 www。",
+    "brand   = 界面上所有出现应用名的地方（同时也是 Bark 通知分组名，用真名会暴露身份）",
+    "disguise= 首次安装时默认的伪装壳，用户之后仍可在设置里改",
+    "hide    = 这个外壳里要藏掉的其他伪装入口，避免天气版里冒出计算器选项"
+  ],
+  "shells": {
+    "ghostchat": {
+      "brand": "GhostChat",
+      "package": "com.gc.ghostchat",
+      "themeColor": "#ff9a9e",
+      "disguise": "calculator",
+      "hide": [],
+      "apk": "ghostchat.apk"
+    },
+    "calculator": {
+      "brand": "计算器",
+      "package": "com.gc.calculator",
+      "themeColor": "#1c1c1e",
+      "disguise": "calculator",
+      "hide": ["weather", "clock", "note"],
+      "apk": "gc-calculator.apk"
+    },
+    "weather": {
+      "brand": "天气",
+      "package": "com.gc.weather",
+      "themeColor": "#2e5a8c",
+      "disguise": "weather",
+      "hide": ["calculator", "clock", "note"],
+      "apk": "gc-weather.apk"
+    }
+  }
+}
