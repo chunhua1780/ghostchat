@@ -1,5 +1,5 @@
 // GhostChat Service Worker v3 — 像普通App一样秒开：页面和库文件先用本机存的，后台再更新 + push
-const CACHE = 'gc-v2.47';        // 随版本清掉：带版本号的聊天核心等
+const CACHE = 'gc-v2.48';        // 随版本清掉：带版本号的聊天核心等
 const SHELL = 'gc-shell';        // 页面本身（不随版本清掉，保证每次都能秒开）
 const STATIC = 'gc-static';      // 第三方库（supabase / jsQR），内容不变
 const GC_BASE_URL = self.location.origin + self.location.pathname.replace(/[^/]*$/, '');
@@ -70,7 +70,7 @@ self.addEventListener('fetch', function(e){
   var url = e.request.url;
   if(e.request.method !== 'GET') return;
   // Supabase API, metered TURN, push APIs → network only (no cache)
-  if(url.indexOf('supabase.co') >= 0 || url.indexOf('metered.ca') >= 0 ||
+  if(url.indexOf('supabase.co') >= 0 || url.indexOf('workers.dev') >= 0 || url.indexOf('metered.ca') >= 0 ||
      url.indexOf('onesignal.com') >= 0 || url.indexOf('fcm.googleapis.com') >= 0 ||
      url.indexOf('open-meteo.com') >= 0) return; // 天气要实时的（页面自己会先显示上次存的）
 
